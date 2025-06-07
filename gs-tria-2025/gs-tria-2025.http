@@ -1,0 +1,6 @@
+@gs_tria_2025_HostAddress = http://localhost:5041
+
+GET {{gs_tria_2025_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
