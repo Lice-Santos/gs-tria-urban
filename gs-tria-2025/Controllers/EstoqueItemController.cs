@@ -12,11 +12,13 @@ namespace gs_tria_2025.Controllers
     {
         private readonly EstoqueItemService _estoqueService;
 
+        // Injeção de dependência do serviço de estoque
         public EstoqueItemController(EstoqueItemService estoqueService)
         {
             _estoqueService = estoqueService;
         }
 
+        //busca todos os estoques
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EstoqueItem>>> GetAll()
         {
@@ -24,6 +26,7 @@ namespace gs_tria_2025.Controllers
             return Ok(estoques);
         }
 
+        //busca estoque pelo id
         [HttpGet("{id}")]
         public async Task<ActionResult<EstoqueItem>> GetById(int id)
         {
@@ -33,6 +36,25 @@ namespace gs_tria_2025.Controllers
 
             return Ok(estoque);
         }
+
+        //busca pelo id do item em um estoque
+        [HttpGet("item/{idItem}")]
+        public async Task<ActionResult<IEnumerable<EstoqueItem>>> GetByItem(int idItem)
+        {
+            var estoques = await _estoqueService.GetByItemAsync(idItem);
+            return Ok(estoques);
+        }
+
+        //busca pelo id do item em um ponto de distribuição
+
+        [HttpGet("ponto/{idPonto}")]
+        public async Task<ActionResult<IEnumerable<EstoqueItem>>> GetByPontoDistribuicao(int idPonto)
+        {
+            var estoques = await _estoqueService.GetByPontoDistribuicaoAsync(idPonto);
+            return Ok(estoques);
+        }
+
+        //post
 
         [HttpPost]
         public async Task<ActionResult> Post(EstoqueItemDTO dto)
@@ -60,6 +82,8 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //put
+
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, EstoqueItemDTO dto)
         {
@@ -86,6 +110,8 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //deleta por id
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -98,20 +124,6 @@ namespace gs_tria_2025.Controllers
             {
                 return NotFound(ex.Message);
             }
-        }
-
-        [HttpGet("item/{idItem}")]
-        public async Task<ActionResult<IEnumerable<EstoqueItem>>> GetByItem(int idItem)
-        {
-            var estoques = await _estoqueService.GetByItemAsync(idItem);
-            return Ok(estoques);
-        }
-
-        [HttpGet("ponto/{idPonto}")]
-        public async Task<ActionResult<IEnumerable<EstoqueItem>>> GetByPontoDistribuicao(int idPonto)
-        {
-            var estoques = await _estoqueService.GetByPontoDistribuicaoAsync(idPonto);
-            return Ok(estoques);
         }
     }
 }

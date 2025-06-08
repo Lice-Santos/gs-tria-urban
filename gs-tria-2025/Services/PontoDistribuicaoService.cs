@@ -12,6 +12,7 @@ namespace gs_tria_2025.Services
         private readonly EnderecoRepository _enderecoRepository;
         private readonly UsuarioRepository _usuarioRepository;
 
+        // Construtor com injeção de dependências
         public PontoDistribuicaoService(
             PontoDistribuicaoRepository pontoRepository,
             EnderecoRepository enderecoRepository,
@@ -40,6 +41,7 @@ namespace gs_tria_2025.Services
             var usuario = await _usuarioRepository.GetByIdAsync(dto.IdUsuario);
             PontoDistribuicaoValidation.ValidarExistenciaUsuario(usuario);
 
+            // nova entidade ponto de distribuição
             var ponto = new PontoDistribuicao
             {
                 Tipo = dto.Tipo,
@@ -64,6 +66,7 @@ namespace gs_tria_2025.Services
             var usuario = await _usuarioRepository.GetByIdAsync(dto.IdUsuario);
             PontoDistribuicaoValidation.ValidarExistenciaUsuario(usuario);
 
+            // Atualiza campos do ponto existente
             pontoExistente.Tipo = dto.Tipo;
             pontoExistente.Nome = dto.Nome;
             pontoExistente.IdEndereco = dto.IdEndereco;

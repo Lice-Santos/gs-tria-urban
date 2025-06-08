@@ -11,17 +11,20 @@ namespace gs_tria_2025.Controllers
     {
         private readonly EnderecoService _enderecoService;
 
+        // Injeção de dependência do serviço de endereço
         public EnderecoController(EnderecoService enderecoService)
         {
             _enderecoService = enderecoService;
         }
 
+        //Obtém todos os endereços
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Endereco>>> Get()
         {
             return Ok(await _enderecoService.GetAllAsync());
         }
 
+        //Obtém o endereço correspondente ao ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Endereco>> GetById(int id)
         {
@@ -30,6 +33,7 @@ namespace gs_tria_2025.Controllers
             return Ok(endereco);
         }
 
+        //obtém um endereço pelo CEP
         [HttpGet("cep/{cep}")]
         public async Task<ActionResult<Endereco>> GetByCep(string cep)
         {
@@ -45,6 +49,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //obtém todos os endereços com logradouro passado
         [HttpGet("logradouro/{logradouro}")]
         public async Task<ActionResult<IEnumerable<Endereco>>> GetByLogradouro(string logradouro)
         {
@@ -53,6 +58,7 @@ namespace gs_tria_2025.Controllers
             return Ok(enderecos);
         }
 
+        //obtém todos os endereços com cidade passada
         [HttpGet("cidade/{cidade}")]
         public async Task<ActionResult<IEnumerable<Endereco>>> FiltrarPorCidade(string cidade)
         {
@@ -68,6 +74,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //POST
         [HttpPost]
         public async Task<ActionResult> Post(Endereco endereco)
         {
@@ -95,6 +102,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //PUT
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, Endereco endereco)
         {
@@ -128,6 +136,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //DELETE
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

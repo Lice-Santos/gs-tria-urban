@@ -11,6 +11,7 @@ namespace gs_tria_2025.Services
         private readonly ItemRepository _itemRepository;
         private readonly PontoDistribuicaoRepository _pontoRepository;
 
+        // Construtor com injeção de dependência
         public EstoqueItemService(
             EstoqueItemRepository estoqueItemRepository,
             ItemRepository itemRepository,
@@ -68,6 +69,7 @@ namespace gs_tria_2025.Services
 
             EstoqueItemValidation.ValidarEstoque(dto);
 
+            // Atualiza propriedades do estoque
             estoque.Quantidade = dto.Quantidade;
             estoque.IdItem = dto.IdItem;
             estoque.IdPontoDistribuicao = dto.IdPontoDistribuicao;

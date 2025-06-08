@@ -11,6 +11,7 @@ namespace gs_tria_2025.Services
         private readonly UsuarioRepository _usuarioRepository;
         private readonly EnderecoRepository _enderecoRepository;
 
+        // Construtor com injeção de dependências
         public UsuarioService(UsuarioRepository usuarioRepository,
                               EnderecoRepository enderecoRepository)
         {
@@ -40,6 +41,7 @@ namespace gs_tria_2025.Services
             if (endereco == null)
                 throw new ObjetoNaoEncontradoException("Endereço", "vinculação ao usuário");
 
+            //criando novo usuário com base na dto
             var usuario = new Usuario
             {
                 NomeCompleto = dto.NomeCompleto,
@@ -86,9 +88,14 @@ namespace gs_tria_2025.Services
         }
 
         public async Task<IEnumerable<Usuario>> GetByNomeAsync(string nome)
-            => await _usuarioRepository.GetByNomeAsync(nome);
+        {
+            return await _usuarioRepository.GetByNomeAsync(nome);
+        }
 
         public async Task<IEnumerable<Usuario>> FiltrarUsernameAsync(string username)
-            => await _usuarioRepository.FiltrarUsernameAsync(username);
+        {
+            return await _usuarioRepository.FiltrarUsernameAsync(username);
+        }
+
     }
 }

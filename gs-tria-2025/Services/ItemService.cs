@@ -8,6 +8,7 @@ namespace gs_tria_2025.Services
     {
         private readonly ItemRepository _itemRepository;
 
+        // Construtor com injeção de dependência do repositório de item
         public ItemService(ItemRepository itemRepository)
         {
             _itemRepository = itemRepository;
