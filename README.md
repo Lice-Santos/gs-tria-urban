@@ -115,7 +115,7 @@ Enchentes urbanas causam perdas de vidas, danos materiais e interrompem serviço
 
 ## ✅ Exemplos de Testes via Swagger
 
-> Para cada controller, execute 3 cenários: sucesso e dois casos de erro.
+> Para cada controller, execute cenários de sucesso e erro.
 
 ---
 
@@ -124,7 +124,7 @@ Enchentes urbanas causam perdas de vidas, danos materiais e interrompem serviço
 1. **GET `/api/Endereco`**  
    - ✅ Retorna lista de endereços (200 OK).  
    - ❌ Se não houver registros, retorna `[]` (200 OK).  
-   - ❌ Rota incorreta (e.g. `/api/EnderecoX`) retorna 404.
+
 
 2. **GET `/api/Endereco/cep/{cep}`**  
    - ✅ CEP válido (`12345678`) retorna dados do endereço.  
@@ -165,9 +165,9 @@ Enchentes urbanas causam perdas de vidas, danos materiais e interrompem serviço
    - ❌ `id` inválido (`"abc"`) retorna 400 Bad Request.
 
 2. **GET `/api/Item/nome/{nome}`**  
-   - ✅ Nome parcial (`"Arroz"`) retorna lista de itens.  
+   - ✅ Nome parcial (`"Camisa"`) retorna lista de itens.  
    - ❌ Nome que não existe retorna `[]` (200 OK).  
-   - ❌ Rota errada (`/api/Item/name/Arroz`) retorna 404.
+
 
 3. **POST `/api/Item`**  
    - ✅ Body com campos válidos retorna 201 Created.  
@@ -183,12 +183,7 @@ Enchentes urbanas causam perdas de vidas, danos materiais e interrompem serviço
    - ❌ `id` inexistente retorna 404 Not Found.  
    - ❌ `id` texto retorna 400 Bad Request.
 
-2. **GET `/api/PontoDistribuicao/tipo/{tipo}`**  
-   - ✅ `tipo` válido (`ONG`) retorna lista filtrada.  
-   - ❌ `tipo` não mapeado retorna `[]` (200 OK).  
-   - ❌ Valor numérico (`123`) retorna 400 Bad Request.
-
-3. **POST `/api/PontoDistribuicao`**  
+2. **POST `/api/PontoDistribuicao`**  
    - ✅ JSON válido retorna 200 OK.  
    - ❌ `nome` vazio retorna 400 Bad Request.  
    - ❌ `enderecoId` inexistente retorna 404 Not Found.
