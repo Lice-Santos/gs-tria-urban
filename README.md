@@ -208,3 +208,18 @@ Enchentes urbanas causam perdas de vidas, danos materiais e interrompem serviço
    - ❌ `email` mal formatado retorna 400 Bad Request.
 
 ---
+
+## ⚙️INSTALAÇÃO ##
+**Bibliotecas instaladas:**
+- dotnet add package Microsoft.EntityFrameworkCore.Design
+- dotnet add package Microsoft.EntityFrameworkCore
+- dotnet add package Microsoft.EntityFrameworkCore.Tools
+- dotnet add package Oracle.EntityFrameworkCore
+
+**EF Core:**
+- dotnet tool install --global dotnet-ef
+
+**Comandos Utilizados para Criação do Migration:**
+- Add-Migration InitialCreate
+- dotnet ef migrations add InitialCreate
+
