@@ -12,20 +12,21 @@ namespace gs_tria_2025.Controllers
     {
         private readonly UsuarioService _usuarioService;
 
-
+        // Injeção de dependência do serviço de usuário
 
         public UsuarioController(UsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
 
-
+        //buscar todos os usuários
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
         {
             return Ok(await _usuarioService.GetAllAsync());
         }
 
+        //buscar usuário por id
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetById(int id)
         {
@@ -41,6 +42,22 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        // buscar usuário por nome
+        [HttpGet("nome/{nome}")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetByNome(string nome)
+        {
+            return Ok(await _usuarioService.GetByNomeAsync(nome));
+        }
+
+        //buscar usuário por username
+        [HttpGet("username/{username}")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetByUsername(string username)
+        {
+            var usuarios = await _usuarioService.FiltrarUsernameAsync(username);
+            return Ok(usuarios);
+        }
+
+        //adicionar usuário
         [HttpPost]
         public async Task<ActionResult> Post(UsuarioDTO dto)
         {
@@ -69,6 +86,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //atualizar usuário
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] UsuarioDTO dto)
         {
@@ -99,6 +117,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //deletar usuário
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -113,12 +132,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
-        [HttpGet("nome/{nome}")]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetByNome(string nome)
-            => Ok(await _usuarioService.GetByNomeAsync(nome));
 
-        [HttpGet("username/{username}")]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetByUsername(string username)
-            => Ok(await _usuarioService.FiltrarUsernameAsync(username));
+
     }
 }

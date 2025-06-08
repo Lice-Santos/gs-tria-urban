@@ -11,17 +11,22 @@ namespace gs_tria_2025.Controllers
     {
         private readonly ItemService _itemService;
 
+        // Injeção de dependência do serviço de item
+
         public ItemController(ItemService itemService)
         {
             _itemService = itemService;
         }
 
+        //busca todos os itens
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> GetAll()
         {
             var itens = await _itemService.GetAllAsync();
             return Ok(itens);
         }
+
+        //busca item por id
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Item>> GetById(int id)
@@ -33,6 +38,23 @@ namespace gs_tria_2025.Controllers
             return Ok(item);
         }
 
+        //busca item por nome
+        [HttpGet("nome/{nome}")]
+        public async Task<ActionResult<IEnumerable<Item>>> GetByNome(string nome)
+        {
+            var itens = await _itemService.GetByNomeAsync(nome);
+            return Ok(itens);
+        }
+
+        //busca todos os itens de uma categoria
+        [HttpGet("categoria/{categoria}")]
+        public async Task<ActionResult<IEnumerable<Item>>> GetByCategoria(string categoria)
+        {
+            var itens = await _itemService.GetByCategoriaAsync(categoria);
+            return Ok(itens);
+        }
+
+        //post
         [HttpPost]
         public async Task<ActionResult> Post(Item item)
         {
@@ -63,6 +85,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //atualiza item
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, Item item)
         {
@@ -95,6 +118,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //deleta por id
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -104,20 +128,6 @@ namespace gs_tria_2025.Controllers
 
             await _itemService.DeleteAsync(item);
             return NoContent();
-        }
-
-        [HttpGet("nome/{nome}")]
-        public async Task<ActionResult<IEnumerable<Item>>> GetByNome(string nome)
-        {
-            var itens = await _itemService.GetByNomeAsync(nome);
-            return Ok(itens);
-        }
-
-        [HttpGet("categoria/{categoria}")]
-        public async Task<ActionResult<IEnumerable<Item>>> GetByCategoria(string categoria)
-        {
-            var itens = await _itemService.GetByCategoriaAsync(categoria);
-            return Ok(itens);
         }
     }
 }

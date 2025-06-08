@@ -9,6 +9,7 @@ namespace gs_tria_2025.Services
     {
         private readonly EnderecoRepository _enderecoRepository;
 
+        // Construtor com injeção de dependência do repositório de endereços
         public EnderecoService(EnderecoRepository enderecoRepository)
         {
             _enderecoRepository = enderecoRepository;
@@ -52,6 +53,7 @@ namespace gs_tria_2025.Services
             }
             EnderecoValidation.ValidarEndereco(endereco);
 
+            // Atualiza os campos do endereço existente
             existente.Logradouro = endereco.Logradouro;
             existente.Numero = endereco.Numero;
             existente.Cep = endereco.Cep;

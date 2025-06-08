@@ -13,11 +13,14 @@ namespace gs_tria_2025.Controllers
     {
         private readonly PontoDistribuicaoService _pontoService;
 
+        // Injeção de dependência do serviço de ponto de distribuição
+
         public PontoDistribuicaoController(PontoDistribuicaoService pontoService)
         {
             _pontoService = pontoService;
         }
 
+        //busca todos os pontos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PontoDistribuicao>>> GetAll()
         {
@@ -25,6 +28,7 @@ namespace gs_tria_2025.Controllers
             return Ok(pontos);
         }
 
+        //busca ponto por id
         [HttpGet("{id}")]
         public async Task<ActionResult<PontoDistribuicao>> GetById(int id)
         {
@@ -35,6 +39,23 @@ namespace gs_tria_2025.Controllers
             return Ok(ponto);
         }
 
+        //buscar ponto pelo nome
+        [HttpGet("nome/{nome}")]
+        public async Task<ActionResult<IEnumerable<PontoDistribuicao>>> GetByNome(string nome)
+        {
+            var pontos = await _pontoService.GetByNomeAsync(nome);
+            return Ok(pontos);
+        }
+
+        //buscar todos os pontos de acordo com o tipo (comercial ou residencial)
+        [HttpGet("tipo/{tipo}")]
+        public async Task<ActionResult<IEnumerable<PontoDistribuicao>>> GetByTipo(Tipo tipo)
+        {
+            var pontos = await _pontoService.GetByTipoAsync(tipo);
+            return Ok(pontos);
+        }
+
+        //adicionar ponto
         [HttpPost]
         public async Task<ActionResult> Create(PontoDistribuicaoDTO dto)
         {
@@ -69,6 +90,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //atualizar ponto
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id,PontoDistribuicaoDTO dto)
         {
@@ -103,6 +125,7 @@ namespace gs_tria_2025.Controllers
             }
         }
 
+        //deletar ponto
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -117,18 +140,6 @@ namespace gs_tria_2025.Controllers
             }
         }
 
-        [HttpGet("nome/{nome}")]
-        public async Task<ActionResult<IEnumerable<PontoDistribuicao>>> GetByNome(string nome)
-        {
-            var pontos = await _pontoService.GetByNomeAsync(nome);
-            return Ok(pontos);
-        }
 
-        [HttpGet("tipo/{tipo}")]
-        public async Task<ActionResult<IEnumerable<PontoDistribuicao>>> GetByTipo(Tipo tipo)
-        {
-            var pontos = await _pontoService.GetByTipoAsync(tipo);
-            return Ok(pontos);
-        }
     }
 }
