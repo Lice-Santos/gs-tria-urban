@@ -223,3 +223,9 @@ Enchentes urbanas causam perdas de vidas, danos materiais e interrompem serviço
 - Add-Migration InitialCreate
 - dotnet ef migrations add InitialCreate
 
+##🎥 VÍDEOS##
+
+| Tipo                | Descrição                            | Link                                                                   |
+| ------------------- | ------------------------------------ | ---------------------------------------------------------------------- |
+| 📢 **Pitch**        | Apresentação rápida do projeto       | [Assista no YouTube](https://youtu.be/H7F3I7Zxw-w?si=jwK8nPOAQlF8tWlr) |
+| 💻 **Demonstração** | Demonstração prática com código real | [Assista no YouTube](https://www.youtube.com/watch?v=XduTg134Q-U)      |
